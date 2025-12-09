@@ -10,7 +10,9 @@ function analyzeRequest(request) {
     // Detect archetype
     let archetype = 'aggressive'; // default
     
-    if (lower.includes('defensive') || lower.includes('defense')) {
+    if (lower.includes('spell') || lower.includes('rocket') || lower.includes('lightning')) {
+        archetype = 'spellHeavy';
+    } else if (lower.includes('defensive') || lower.includes('defense')) {
         archetype = 'defensive';
     } else if (lower.includes('beatdown') || lower.includes('heavy') || lower.includes('golem') || lower.includes('giant')) {
         archetype = 'beatdown';
@@ -18,8 +20,6 @@ function analyzeRequest(request) {
         archetype = 'cycle';
     } else if (lower.includes('siege') || lower.includes('x-bow') || lower.includes('xbow')) {
         archetype = 'siege';
-    } else if (lower.includes('spell') || lower.includes('rocket') || lower.includes('lightning')) {
-        archetype = 'spellHeavy';
     } else if (lower.includes('aggressive') || lower.includes('attack') || lower.includes('hog') || lower.includes('balloon')) {
         archetype = 'aggressive';
     }
@@ -65,7 +65,7 @@ function buildDeck(analysis) {
     
     // Fill remaining slots based on archetype
     // 1. Add win condition if not present
-    if (!deck.some(key => cards[key].category === 'win-condition')) {
+    if (!deck.some(key => cards[key] && cards[key].category === 'win-condition')) {
         const winCond = getRandomFromArray(template.winConditions.filter(c => !usedCards.has(c)));
         if (winCond) {
             deck.push(winCond);
@@ -75,7 +75,7 @@ function buildDeck(analysis) {
     
     // 2. Add spells (usually 2)
     const spellsNeeded = archetype === 'spellHeavy' ? 3 : 2;
-    let spellsAdded = deck.filter(key => cards[key].type === 'Spell').length;
+    let spellsAdded = deck.filter(key => cards[key] && cards[key].type === 'Spell').length;
     while (spellsAdded < spellsNeeded && deck.length < 8) {
         const spell = getRandomFromArray(template.spells.filter(c => !usedCards.has(c)));
         if (spell) {
@@ -88,7 +88,7 @@ function buildDeck(analysis) {
     }
     
     // 3. Add building if archetype uses one
-    if (template.buildings.length > 0 && !deck.some(key => cards[key].type === 'Building')) {
+    if (template.buildings.length > 0 && !deck.some(key => cards[key] && cards[key].type === 'Building')) {
         const building = getRandomFromArray(template.buildings.filter(c => !usedCards.has(c)));
         if (building && deck.length < 8) {
             deck.push(building);
@@ -166,6 +166,8 @@ function displayDeck(deckKeys, archetype, request) {
     
     deckKeys.forEach(key => {
         const card = cards[key];
+        if (!card) return; // Skip if card doesn't exist
+        
         totalElixir += card.cost;
         cardsByType[card.type]++;
         
