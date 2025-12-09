@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clashmakr - Clash Royale Deck Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ Clashmakr</h1>
+            <p class="subtitle">AI-Powered Clash Royale Deck Builder</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <div class="input-container">
+                    <label for="deckRequest">Describe the deck you want:</label>
+                    <textarea 
+                        id="deckRequest" 
+                        placeholder="e.g., 'I want an aggressive deck with hog rider', 'give me a defensive deck', 'create a deck with lots of spells', 'I need a deck for Arena 5'"
+                        rows="4"
+                    ></textarea>
+                    <button id="generateBtn" onclick="generateDeck()">Generate Deck</button>
+                </div>
+                
+                <div class="examples">
+                    <p><strong>Try these examples:</strong></p>
+                    <div class="example-chips">
+                        <span class="chip" onclick="setExample('aggressive deck with hog rider')">Hog Rider Deck</span>
+                        <span class="chip" onclick="setExample('defensive deck with royal giant')">Defensive Deck</span>
+                        <span class="chip" onclick="setExample('spell-heavy deck')">Spell Heavy</span>
+                        <span class="chip" onclick="setExample('beatdown deck with golem')">Beatdown</span>
+                        <span class="chip" onclick="setExample('cycle deck')">Fast Cycle</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deckSection" class="deck-section" style="display: none;">
+                <h2>Your Deck</h2>
+                <div id="deckDescription" class="deck-description"></div>
+                <div id="deckCards" class="deck-cards"></div>
+                <div id="deckStats" class="deck-stats"></div>
+                <div id="deckStrategy" class="deck-strategy"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made with ❤️ for Clash Royale players</p>
+        </footer>
+    </div>
+
+    <script src="cards.js"></script>
+    <script src="deck-builder.js"></script>
+</body>
+</html>
