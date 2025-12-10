@@ -112,6 +112,7 @@ const clashRoyaleCards = [
     // Troops - Rare
     { name: 'Giant', type: 'troop', elixir: 5, icon: '🧔', role: 'tank', targetType: 'ground', rarity: 'rare', description: 'Targets buildings only' },
     { name: 'Musketeer', type: 'troop', elixir: 4, icon: '🔫', role: 'ranged', targetType: 'both', rarity: 'rare', description: 'Long range single target' },
+    { name: 'Goblin Machine', type: 'troop', elixir: 4, icon: '🛠️', role: 'support', targetType: 'both', rarity: 'rare', arena: 10, description: 'Goblin-operated flying contraption that fires rapid darts; versatile air support.' },
     { name: 'Mini PEKKA', type: 'troop', elixir: 4, icon: '⚔️', role: 'damage', targetType: 'ground', rarity: 'rare', description: 'High single target damage' },
     { name: 'Valkyrie', type: 'troop', elixir: 4, icon: '👸', role: 'splash', targetType: 'ground', rarity: 'rare', description: '360° melee splash damage' },
     { name: 'Hog Rider', type: 'troop', elixir: 4, icon: '🐗', role: 'wincon', targetType: 'ground', rarity: 'rare', description: 'Fast building targeter' },
