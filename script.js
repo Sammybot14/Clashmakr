@@ -269,20 +269,20 @@ const gameKnowledge = {
     
     // ==================== CURRENT CARD STATISTICS (VERIFIED - DECEMBER 2025) ====================
     currentCardStats: {
-        totalCards: 118, // 8 champions + 4 heroes + 106 other cards
+        totalCards: 119, // 8 champions + 4 heroes + 107 other cards (Goblin Machine added)
         champions: 8, // Official Clash Royale champions
         heroes: 4, // Custom hero cards
         evolutions: 23, // All verified evolution cards
         byRarity: {
             common: 30,
-            rare: 31,
+            rare: 32, // Goblin Machine added
             epic: 34, // Electro Giant moved from legendary to epic
-            legendary: 21, // Electro Giant moved to epic
+            legendary: 21,
             champion: 8,
             hero: 4,
             evolution: 23
         },
-        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 21 Legendaries, and 23 Evolution cards"
+        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 21 Legendaries, and 23 Evolution cards (includes Goblin Machine as a Rare)"
     },
     
     // ==================== GAME HISTORY ====================
