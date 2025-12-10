@@ -4549,7 +4549,7 @@ function buildDeckFromRequest(requestedCards, deckStyle) {
         deck = [...deck, ...scored.slice(0, 8 - deck.length).map(s => s.card)];
     } else {
         // Standard optimal deck building
-        deck = buildOptimalDeck(includedNames);
+        deck = buildOptimalDeck(includedNames, deckStyle);
     }
     
     return deck;
@@ -4558,6 +4558,21 @@ function buildDeckFromRequest(requestedCards, deckStyle) {
 // NEW: Find best proven deck that contains requested cards
 function findBestProvenDeck(requestedCards) {
     if (!requestedCards || requestedCards.length === 0) return null;
+
+    // Helper: normalize names by lowercasing and removing punctuation/extra whitespace
+    function normalizeName(n) {
+        if (!n || typeof n !== 'string') return '';
+        return n.toLowerCase().replace(/[\.|,|'|’|\-|_]/g, '').replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    // Map requested to normalized canonical forms and try to resolve with card DB
+    const normalizedRequested = requestedCards.map(r => {
+        const raw = String(r || '');
+        const normalized = normalizeName(raw);
+        // Try to resolve to a canonical card name from clashRoyaleCards
+        const resolved = clashRoyaleCards.find(c => normalizeName(c.name) === normalized);
+        return resolved ? resolved.name : raw;
+    });
     
     // Safety check: ensure gameKnowledge and metaDecks exist
     if (!gameKnowledge || !gameKnowledge.metaDecks || !gameKnowledge.metaDecks.decks) {
@@ -4570,8 +4585,16 @@ function findBestProvenDeck(requestedCards) {
     // Find all decks that contain ALL requested cards (perfect matches first)
     allProvenDecks.forEach(metaDeck => {
         const deckCards = metaDeck.cards || [];
-        const containsAllCards = requestedCards.every(requestedCard => 
-            deckCards.some(deckCard => deckCard === requestedCard)
+        // Build normalized set for quick compare
+        const normalizedDeckSet = deckCards.map(dc => {
+            const n = String(dc || '');
+            // try to resolve via card DB
+            const resolved = clashRoyaleCards.find(c => normalizeName(c.name) === normalizeName(n));
+            return resolved ? normalizeName(resolved.name) : normalizeName(n);
+        });
+
+        const containsAllCards = normalizedRequested.every(requestedCard =>
+            normalizedDeckSet.includes(normalizeName(requestedCard))
         );
         
         if (containsAllCards) {
@@ -4597,11 +4620,17 @@ function findBestProvenDeck(requestedCards) {
     });
     
     // If no perfect matches, try partial matches (deck contains at least 50% of requested cards)
-    if (matchingDecks.length === 0 && requestedCards.length <= 4) {
+    if (matchingDecks.length === 0 && normalizedRequested.length <= 4) {
         allProvenDecks.forEach(metaDeck => {
             const deckCards = metaDeck.cards || [];
-            const matchingCards = requestedCards.filter(requestedCard => 
-                deckCards.some(deckCard => deckCard === requestedCard)
+            const normalizedDeckSet = deckCards.map(dc => {
+                const n = String(dc || '');
+                const resolved = clashRoyaleCards.find(c => normalizeName(c.name) === normalizeName(n));
+                return resolved ? normalizeName(resolved.name) : normalizeName(n);
+            });
+
+            const matchingCards = normalizedRequested.filter(requestedCard =>
+                normalizedDeckSet.includes(normalizeName(requestedCard))
             );
             const matchingCount = matchingCards.length;
             const matchPercentage = (matchingCount / requestedCards.length) * 100;
@@ -4655,7 +4684,7 @@ function findBestProvenDeck(requestedCards) {
     return null;
 }
 
-function buildOptimalDeck(mustInclude) {
+function buildOptimalDeck(mustInclude, deckStyle) {
     // Safety check: ensure mustInclude is an array
     if (!Array.isArray(mustInclude)) {
         mustInclude = [];
@@ -4686,6 +4715,16 @@ function buildOptimalDeck(mustInclude) {
     
     scoredCards.sort((a, b) => b.score - a.score);
     
+    // If a deckStyle is provided, apply simple biases
+    if (deckStyle === 'cycle') {
+        // prefer lower elixir cards
+        scoredCards.forEach(s => s.score += (4 - s.card.elixir) * 6);
+    } else if (deckStyle === 'beatdown') {
+        scoredCards.forEach(s => s.score += (s.card.role === 'tank' ? 40 : 0) + (s.card.elixir >= 5 ? 10 : 0));
+    }
+
+    scoredCards.sort((a, b) => b.score - a.score);
+
     for (let i = 0; i < remaining && i < scoredCards.length; i++) {
         const candidate = scoredCards[i].card;
         if (!deck.includes(candidate)) deck.push(candidate);
