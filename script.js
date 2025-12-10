@@ -85,6 +85,10 @@ const clashRoyaleCards = [
     { name: 'Mighty Miner', type: 'champion', elixir: 4, icon: '⛏️', role: 'tank', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Burrows underground and gains armor' },
     { name: 'Monk', type: 'champion', elixir: 5, icon: '🧘', role: 'support', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Deflects projectiles with Pensive Protection' },
     { name: 'Little Prince', type: 'champion', elixir: 3, icon: '🤴', role: 'wincon', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Guardian angel ability for support' },
+    { name: 'Hero Musketeer', type: 'champion', elixir: 4, icon: '🎯', role: 'ranged', targetType: 'both', rarity: 'champion', arena: 16, description: 'Enhanced musketeer with hero abilities' },
+    { name: 'Hero Mini P.E.K.K.A', type: 'champion', elixir: 4, icon: '⚔️', role: 'tank', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Powerful mini tank with hero abilities' },
+    { name: 'Hero Knight', type: 'champion', elixir: 3, icon: '🛡️', role: 'tank', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Armored knight with enhanced abilities' },
+    { name: 'Hero Giant', type: 'champion', elixir: 5, icon: '🗿', role: 'tank', targetType: 'buildings', rarity: 'champion', arena: 16, description: 'Giant hero that targets buildings' },
     
     // Troops - Common (Training Camp & Early Arenas)
     { name: 'Knight', type: 'troop', elixir: 3, icon: '🗡️', role: 'tank', targetType: 'ground', rarity: 'common', arena: 0, description: 'Reliable melee tank' },
@@ -255,18 +259,18 @@ const gameKnowledge = {
     
     // ==================== CURRENT CARD STATISTICS (VERIFIED - DECEMBER 2025) ====================
     currentCardStats: {
-        totalCards: 108, // Verified real cards from official game
-        champions: 6, // Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince
+        totalCards: 112, // Verified real cards from official game
+        champions: 10, // 6 real champions + 4 hero cards
         evolutions: 18, // Verified evolution cards including Tesla and Bomber
         byRarity: {
             common: 30,
             rare: 31,
             epic: 33,
             legendary: 23, // Phoenix is already counted as legendary
-            champion: 6,
+            champion: 10,
             evolution: 18
         },
-        description: "Clash Royale card pool with 6 Champions with unique abilities, 23 Legendaries (Phoenix included), and 18 Evolution cards"
+        description: "Clash Royale card pool with 10 Champions (6 real + 4 heroes) with unique abilities, 23 Legendaries (Phoenix included), and 18 Evolution cards"
     },
     
     // ==================== GAME HISTORY ====================
