@@ -20,22 +20,29 @@ function findClosestMatch(input, options, threshold = 75) {
         const lowerOption = option.toLowerCase();
         let score = 0;
         
-        // Exact match - always return immediately
+        // Exact match - immediate winner
         if (lowerOption === lowerInput) return option;
-        
-        // Exact word match in multi-word card names
-        const optionWords = lowerOption.split(' ');
-        if (optionWords.some(word => word === lowerInput)) {
-            return null; // Don't correct if it's an exact word
+
+        // If the user provided a multi-word input (e.g. "mini pekka"), prefer options
+        // that contain all words as whole words. This prevents matching "mini pekka" -> "pekka".
+        const inputWords = lowerInput.split(/\s+/).filter(Boolean);
+        if (inputWords.length > 1) {
+            const optionWords = lowerOption.split(/\s+/);
+            const allPresent = inputWords.every(w => optionWords.includes(w));
+            if (allPresent) return option;
         }
-        
-        // Only use contains match for longer inputs (5+ chars) to avoid false positives
+
+        // Only use contains match for longer inputs (5+ chars) but require word boundaries
         if (lowerInput.length >= 5) {
-            if (lowerOption.includes(lowerInput)) score = 85;
-            // Don't score if input contains option (prevents 'mini' -> 'Minions')
-            if (lowerInput.includes(lowerOption) && lowerOption.length < lowerInput.length) score = 0;
+            // match whole words inside option to avoid substrings (e.g. 'mini' matching 'minions')
+            const regex = new RegExp('\\\b' + lowerInput.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b');
+            if (regex.test(lowerOption)) score = 85;
+            // If the input contains the option name as a whole word and option is shorter,
+            // don't promote the shorter option over a more specific input (prevents 'mini pekka' -> 'pekka')
+            const optionRegex = new RegExp('\\\b' + lowerOption.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b');
+            if (optionRegex.test(lowerInput) && lowerOption.length < lowerInput.length) score = 0;
         }
-        
+
         // Levenshtein distance - only for similar length strings
         const lengthDiff = Math.abs(lowerInput.length - lowerOption.length);
         if (lengthDiff <= 3) { // Only check if lengths are close
@@ -4460,27 +4467,69 @@ function buildDeckFromRequest(requestedCards, deckStyle) {
         requestedCards = [];
     }
     
-    // ALWAYS try to find a proven deck first (prioritize win rates)
-    if (requestedCards.length > 0) {
-        const provenDeck = findBestProvenDeck(requestedCards);
+    // Resolve requested names to canonical card names (case-insensitive + fuzzy)
+    const resolvedRequested = [];
+    const corrections = [];
+    requestedCards.forEach(rawName => {
+        if (!rawName || typeof rawName !== 'string') return;
+        const nameTrim = rawName.trim();
+        const nameLower = nameTrim.toLowerCase();
+
+        // Try exact case-insensitive match first
+        let cardObj = clashRoyaleCards.find(c => c.name.toLowerCase() === nameLower);
+        if (!cardObj) {
+            // Try substring match (whole-word) to avoid "pekka" matching "mini pekka"
+            cardObj = clashRoyaleCards.find(c => {
+                const n = c.name.toLowerCase();
+                return n.split(/\s+/).some(token => token === nameLower) || n === nameLower;
+            });
+        }
+
+        if (!cardObj) {
+            // Fuzzy fallback
+            const closest = findClosestCardMatch(nameTrim);
+            if (closest) {
+                cardObj = clashRoyaleCards.find(c => c.name === closest);
+                corrections.push({ typed: rawName, corrected: closest });
+            }
+        }
+
+        if (cardObj && !resolvedRequested.includes(cardObj.name)) {
+            resolvedRequested.push(cardObj.name);
+        }
+    });
+
+    // ALWAYS try to find a proven deck first (prioritize win rates) using resolved names
+    if (resolvedRequested.length > 0) {
+        const provenDeck = findBestProvenDeck(resolvedRequested);
         if (provenDeck && provenDeck.length > 0) {
             console.log(`Found proven deck: ${provenDeck.provenDeckInfo?.name || 'Unknown'}`);
+            // Attach corrections if any
+            if (corrections.length > 0) provenDeck.requestedCorrections = corrections;
             return provenDeck; // Return the proven tournament/meta deck
         }
     }
     
     // STEP 2: If no proven deck matches, build custom optimal deck
-    // Filter out any undefined cards and map to card objects
-    let deck = requestedCards
-        .map(name => clashRoyaleCards.find(c => c.name === name))
-        .filter(card => card !== undefined);
+    // Use the resolvedRequested names if available, else fall back to original requestedCards
+    const useRequested = (resolvedRequested && resolvedRequested.length > 0) ? resolvedRequested : requestedCards;
+
+    // Map to card objects (case-insensitive matching) and preserve only unique entries
+    let deck = [];
+    useRequested.forEach(name => {
+        if (!name) return;
+        const found = clashRoyaleCards.find(c => c.name.toLowerCase() === name.toLowerCase());
+        if (found && !deck.includes(found)) deck.push(found);
+    });
     
     if (deck.length >= 8) {
         return deck.slice(0, 8);
     }
     
     // Build based on style or just optimal
-    const available = clashRoyaleCards.filter(card => !requestedCards.includes(card.name));
+    // When selecting remaining cards, exclude any already-included names
+    const includedNames = deck.map(c => c.name);
+    const available = clashRoyaleCards.filter(card => !includedNames.includes(card.name));
     
     if (deckStyle === 'cycle') {
         // Prefer low elixir cards
@@ -4500,7 +4549,7 @@ function buildDeckFromRequest(requestedCards, deckStyle) {
         deck = [...deck, ...scored.slice(0, 8 - deck.length).map(s => s.card)];
     } else {
         // Standard optimal deck building
-        deck = buildOptimalDeck(requestedCards);
+        deck = buildOptimalDeck(includedNames);
     }
     
     return deck;
@@ -4612,10 +4661,14 @@ function buildOptimalDeck(mustInclude) {
         mustInclude = [];
     }
     
-    // Filter out undefined cards
-    const deck = mustInclude
-        .map(name => clashRoyaleCards.find(c => c.name === name))
-        .filter(card => card !== undefined);
+    // Resolve mustInclude to canonical card objects, case-insensitive, remove duplicates
+    const deck = [];
+    mustInclude.forEach(name => {
+        if (!name || typeof name !== 'string') return;
+        const nameTrim = name.trim().toLowerCase();
+        const found = clashRoyaleCards.find(c => c.name.toLowerCase() === nameTrim);
+        if (found && !deck.includes(found)) deck.push(found);
+    });
     
     const remaining = 8 - deck.length;
     
@@ -4623,7 +4676,8 @@ function buildOptimalDeck(mustInclude) {
     if (remaining < 0) return deck.slice(0, 8); // Safety: cap at 8 cards
     
     const deckAnalysis = analyzeDeck(deck);
-    const available = clashRoyaleCards.filter(card => !mustInclude.includes(card.name));
+    const includedNames = deck.map(c => c.name);
+    const available = clashRoyaleCards.filter(card => !includedNames.includes(card.name));
     
     const scoredCards = available.map(card => ({
         card,
@@ -4633,7 +4687,8 @@ function buildOptimalDeck(mustInclude) {
     scoredCards.sort((a, b) => b.score - a.score);
     
     for (let i = 0; i < remaining && i < scoredCards.length; i++) {
-        deck.push(scoredCards[i].card);
+        const candidate = scoredCards[i].card;
+        if (!deck.includes(candidate)) deck.push(candidate);
     }
     
     return deck;
