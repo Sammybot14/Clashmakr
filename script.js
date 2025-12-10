@@ -1887,7 +1887,7 @@ function setupEventListeners() {
     setTimeout(() => {
         const freshnessNotice = checkDataFreshness();
         if (freshnessNotice) {
-            const noticeHTML = `<strong>🤖 Deck Builder:</strong> ${freshnessNotice}`;
+            const noticeHTML = `<strong>🤖 Fatboyclashdeckmakr:</strong> ${freshnessNotice}`;
             addChatMessage(noticeHTML, 'bot');
         }
         
@@ -1957,7 +1957,7 @@ async function checkAndAutoUpdate() {
         gameKnowledge.updateInProgress = true;
         
         const updateHTML = `
-            <strong>🤖 Deck Builder:</strong>
+            <strong>🤖 Fatboyclashdeckmakr:</strong>
             <div style="background: linear-gradient(135deg, #00d9ff 0%, #0088cc 100%); padding: 15px; border-radius: 10px; border: 2px solid #00ffff; margin: 10px 0;">
                 <h4 style="color: #000; margin: 0 0 8px 0;">🔄 Auto-Update in Progress</h4>
                 <p style="color: #000; margin: 0; font-size: 0.9em;">Data is ${daysSinceUpdate} days old. Fetching latest information from Clash Royale databases...</p>
@@ -2009,7 +2009,7 @@ async function performAutoUpdate() {
     gameKnowledge.updateInProgress = false;
     
     const successHTML = `
-        <strong>🤖 Deck Builder:</strong>
+        <strong>🤖 Fatboyclashdeckmakr:</strong>
         <div style="background: linear-gradient(135deg, #44ff44 0%, #00cc00 100%); padding: 15px; border-radius: 10px; border: 2px solid #66ff66; margin: 10px 0;">
             <h4 style="color: #000; margin: 0 0 8px 0;">✅ Update Complete!</h4>
             <p style="color: #000; margin: 0; font-size: 0.9em;">All data has been refreshed with the latest information.</p>
@@ -2133,7 +2133,7 @@ function processUserRequest(message) {
             pendingCorrection = null; // Clear pending correction
             // Continue processing with corrected message
         } else if (lowerMessage === 'no' || lowerMessage === 'n' || lowerMessage === 'skip' || lowerMessage === 'ignore') {
-            addChatMessage(`<strong>🤖 Deck Builder:</strong> 👍 Keeping your original spelling. Processing your request...`, 'bot');
+            addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> 👍 Keeping your original spelling. Processing your request...`, 'bot');
             lowerMessage = pendingCorrection.originalMessage.toLowerCase();
             pendingCorrection = null; // Clear pending correction
             // Continue processing with original message
@@ -2191,12 +2191,12 @@ function processUserRequest(message) {
     
     // Auto-correct control (legacy - system now always asks for confirmation)
     if (lowerMessage.includes('enable auto') || lowerMessage.includes('turn on auto') || lowerMessage.includes('auto correct on')) {
-        addChatMessage(`<strong>🤖 Deck Builder:</strong> ℹ️ The spell checker always asks for confirmation before making corrections. This ensures you're always in control! Just reply "yes" or "no" when corrections are suggested.`, 'bot');
+        addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> ℹ️ The spell checker always asks for confirmation before making corrections. This ensures you're always in control! Just reply "yes" or "no" when corrections are suggested.`, 'bot');
         return;
     }
     
     if (lowerMessage.includes('disable auto') || lowerMessage.includes('turn off auto') || lowerMessage.includes('auto correct off')) {
-        addChatMessage(`<strong>🤖 Deck Builder:</strong> ℹ️ Don't worry - the spell checker already asks for your confirmation before making any corrections. You're always in control!`, 'bot');
+        addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> ℹ️ Don't worry - the spell checker already asks for your confirmation before making any corrections. You're always in control!`, 'bot');
         return;
     }
     
@@ -2387,7 +2387,7 @@ function processUserRequest(message) {
     // If not a deck request and no cards found, show help message
     if (!isDeckRequest && (!requestedCards || requestedCards.length === 0)) {
         const helpMsg = `
-            <strong>🤖 Deck Builder:</strong>
+            <strong>🤖 Fatboyclashdeckmakr:</strong>
             <div style="background: #0a0a0a; padding: 20px; border-radius: 10px; border: 2px solid #00d9ff; margin: 15px 0;">
                 <h3 style="color: #00d9ff; margin: 0 0 15px 0;">🤔 I didn't quite understand that.</h3>
                 <p style="color: #c0c0c0; margin: 0 0 15px 0;">Here are some things you can ask me:</p>
@@ -2459,7 +2459,7 @@ function processUserRequest(message) {
     // Show spelling corrections if any were made
     if (requestedCards && requestedCards.corrections && requestedCards.corrections.length > 0) {
         const correctionsMsg = `
-            <strong>🤖 Deck Builder:</strong>
+            <strong>🤖 Fatboyclashdeckmakr:</strong>
             <div style="background: #2a2a0a; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 3px solid #ffaa00;">
                 <strong style="color: #ffaa00;">✏️ Auto-corrected spelling:</strong><br>
                 ${requestedCards.corrections.map(c => `<span style="color: #999;">"${c.typed}"</span> → <span style="color: #00d9ff;">${c.corrected}</span>`).join('<br>')}
@@ -2471,7 +2471,7 @@ function processUserRequest(message) {
     // Show detected cards if any were found
     if (requestedCards && requestedCards.length > 0) {
         const detectionMsg = `
-            <strong>🤖 Deck Builder:</strong>
+            <strong>🤖 Fatboyclashdeckmakr:</strong>
             <div style="background: #0a0a0a; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 3px solid #00d9ff;">
                 <strong style="color: #00d9ff;">✓ Detected ${requestedCards.length} card${requestedCards.length > 1 ? 's' : ''}:</strong> 
                 <span style="color: #fff;">${requestedCards.join(', ')}</span>
@@ -2502,7 +2502,7 @@ function processUserRequest(message) {
     // Validate deck before displaying
     if (!deck || deck.length === 0) {
         const errorMsg = `
-            <strong>🤖 Deck Builder:</strong>
+            <strong>🤖 Fatboyclashdeckmakr:</strong>
             <div style="background: #2a0a0a; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 3px solid #ff4444;">
                 <strong style="color: #ff4444;">⚠️ Unable to build deck</strong><br>
                 <span style="color: #c0c0c0; font-size: 0.9em;">Try asking for specific cards or check your spelling.</span>
@@ -2520,7 +2520,7 @@ function processUserRequest(message) {
 
 function displayGameHistory(query) {
     const lowerQuery = query.toLowerCase();
-    let responseHTML = `<strong>🤖 Deck Builder:</strong> `;
+    let responseHTML = `<strong>🤖 Fatboyclashdeckmakr:</strong> `;
     
     // Check if asking about launch/beginning
     if (lowerQuery.includes('launch') || lowerQuery.includes('release') || lowerQuery.includes('start') || lowerQuery.includes('begin')) {
@@ -2568,7 +2568,7 @@ function displayGameHistory(query) {
 
 function displayCardBalanceHistory(query) {
     const lowerQuery = query.toLowerCase();
-    let responseHTML = `<strong>🤖 Deck Builder:</strong> `;
+    let responseHTML = `<strong>🤖 Fatboyclashdeckmakr:</strong> `;
     
     // Check if asking about specific card
     const cardMatch = clashRoyaleCards.find(card => lowerQuery.includes(card.name.toLowerCase()));
@@ -2652,7 +2652,7 @@ function displayCardBalanceHistory(query) {
 
 function displayMetaHistory() {
     const responseHTML = `
-        <strong>🤖 Deck Builder:</strong> Complete meta evolution throughout Clash Royale history:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Complete meta evolution throughout Clash Royale history:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 600px; overflow-y: auto;">
             <h3 style="color: #e94560;">⏰ Meta Timeline (2016-2025)</h3>
             <p style="color: #999; margin-bottom: 15px;">The game meta has evolved dramatically over 8+ years:</p>
@@ -2680,7 +2680,7 @@ function displayMetaHistory() {
 
 function displayEsportsHistory(query) {
     const responseHTML = `
-        <strong>🤖 Deck Builder:</strong> Clash Royale competitive esports history:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Clash Royale competitive esports history:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560;">🏆 Major Tournaments & Events</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -2707,7 +2707,7 @@ function displayEsportsHistory(query) {
 
 function displayControversyHistory() {
     const responseHTML = `
-        <strong>🤖 Deck Builder:</strong> Major community controversies and backlash:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Major community controversies and backlash:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560;">⚠️ Community Controversies</h3>
             <p style="color: #999; margin-bottom: 15px;">Major events that caused community backlash:</p>
@@ -2737,7 +2737,7 @@ function displayMajorUpdates() {
     );
     
     const responseHTML = `
-        <strong>🤖 Deck Builder:</strong> The biggest updates in Clash Royale history:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> The biggest updates in Clash Royale history:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560;">🚀 Game-Changing Updates</h3>
             ${majorUpdates.map(update => `
@@ -2775,7 +2775,7 @@ function displayGameUpdates() {
     const freshnessStatus = daysSinceUpdate <= 7 ? '🟢 Up to date' : daysSinceUpdate <= 14 ? '🟡 Recent' : '🔴 Needs update';
     
     const updatesHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are the latest Clash Royale updates:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are the latest Clash Royale updates:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <div style="background: #0a0a0a; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #00d9ff;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -3020,7 +3020,7 @@ function displayArenaDeck(query) {
     if (arenaNum && arenaDecks[arenaNum]) {
         const arenaDeck = arenaDecks[arenaNum];
         const responseHTML = `
-            <strong>🤖 Deck Builder:</strong> Best deck for ${arenaDeck.name}:
+            <strong>🤖 Fatboyclashdeckmakr:</strong> Best deck for ${arenaDeck.name}:
             <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #00d9ff; border-radius: 15px;">
                 <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #00d9ff;">
                     <h3 style="color: #00d9ff; margin: 0 0 10px 0;">🏟️ ${arenaDeck.name}</h3>
@@ -3059,7 +3059,7 @@ function displayArenaDeck(query) {
     } else {
         // Show all arena deck options
         const allArenasHTML = `
-            <strong>🤖 Deck Builder:</strong> Best decks for each arena:
+            <strong>🤖 Fatboyclashdeckmakr:</strong> Best decks for each arena:
             <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 600px; overflow-y: auto;">
                 <h3 style="color: #e94560; margin-bottom: 15px;">🏟️ Arena Progression Decks</h3>
                 <p style="color: #999; margin-bottom: 15px;">Ask for a specific arena: "Best deck for Arena 5" or "Arena 10 deck"</p>
@@ -3078,7 +3078,7 @@ function displayArenaDeck(query) {
 
 function displayGameModes() {
     const modesHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are all the Clash Royale game modes:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are all the Clash Royale game modes:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">🏆 Ladder & Ranked</h3>
             <p style="color: #c0c0c0; margin-bottom: 10px;">${gameKnowledge.gameModes.ladder}</p>
@@ -3113,7 +3113,7 @@ function displayGameModes() {
 
 function displayClanInfo() {
     const clanHTML = `
-        <strong>🤖 Deck Builder:</strong> Here's everything about Clans and Clan Wars:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here's everything about Clans and Clan Wars:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">⚔️ Clan Wars 2</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -3136,7 +3136,7 @@ function displayClanInfo() {
 
 function displaySeasonInfo() {
     const seasonHTML = `
-        <strong>🤖 Deck Builder:</strong> Here's info about Seasons and Pass Royale:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here's info about Seasons and Pass Royale:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">📅 Current Season</h3>
             <p style="color: #c0c0c0; margin-bottom: 5px;"><strong>Season:</strong> ${gameKnowledge.seasons.current}</p>
@@ -3155,7 +3155,7 @@ function displaySeasonInfo() {
 
 function displayEconomyInfo() {
     const economyHTML = `
-        <strong>🤖 Deck Builder:</strong> Here's info about Chests, Shop, and Economy:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here's info about Chests, Shop, and Economy:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">📦 All Chests</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -3175,7 +3175,7 @@ function displayEconomyInfo() {
 
 function displayProgressionInfo() {
     const progressionHTML = `
-        <strong>🤖 Deck Builder:</strong> Here's everything about Progression:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here's everything about Progression:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">📈 Level System</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -3200,7 +3200,7 @@ function displayProgressionInfo() {
 
 function displayArenas() {
     const arenasHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are all Clash Royale arenas:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are all Clash Royale arenas:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 10px;">🏟️ All Arenas</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
@@ -3227,7 +3227,7 @@ function displayAllCards() {
     };
     
     const cardsHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are all ${clashRoyaleCards.length} Clash Royale cards:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are all ${clashRoyaleCards.length} Clash Royale cards:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 400px; overflow-y: auto;">
             ${Object.entries(cardsByRarity).filter(([_, cards]) => cards.length > 0).map(([rarity, cards]) => `
                 <h3 style="color: #e94560; margin: 15px 0 10px 0; text-transform: capitalize;">${rarity} (${cards.length})</h3>
@@ -3250,7 +3250,7 @@ function displayChampionCards() {
     const champions = clashRoyaleCards.filter(c => c.rarity === 'champion');
     
     const championsHTML = `
-        <strong>🤖 Deck Builder:</strong> All ${champions.length} Champion Cards:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> All ${champions.length} Champion Cards:
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #2a1a3e 0%, #1a0a2e 100%); border: 2px solid #ff6b9d; border-radius: 15px;">
             <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #ff6b9d;">
                 <h3 style="color: #ff6b9d; margin: 0 0 10px 0;">👑 What are Champions?</h3>
@@ -3310,7 +3310,7 @@ function displayEvolutionCards() {
     const evolutions = clashRoyaleCards.filter(c => c.rarity === 'evolution');
     
     const evolutionsHTML = `
-        <strong>🤖 Deck Builder:</strong> All ${evolutions.length} Evolution Cards:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> All ${evolutions.length} Evolution Cards:
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a3e2a 0%, #0a2e1a 100%); border: 2px solid #00d9ff; border-radius: 15px;">
             <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #00d9ff;">
                 <h3 style="color: #00d9ff; margin: 0 0 10px 0;">⚡ What are Evolution Cards?</h3>
@@ -3388,7 +3388,7 @@ function displaySpecialCards() {
     const evolutions = clashRoyaleCards.filter(c => c.rarity === 'evolution');
     
     const specialHTML = `
-        <strong>🤖 Deck Builder:</strong> All Special Cards (Champions + Evolutions):
+        <strong>🤖 Fatboyclashdeckmakr:</strong> All Special Cards (Champions + Evolutions):
         <div style="margin-top: 15px; padding: 20px; background: #000; border: 2px solid #ff6b9d; border-radius: 15px;">
             <h3 style="color: #ff6b9d; margin: 0 0 15px 0;">👑 Champions (${champions.length} cards)</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-bottom: 25px;">
@@ -3427,7 +3427,7 @@ function displaySpecialCards() {
 
 function displayDeckChecker() {
     const checkerHTML = `
-        <strong>🤖 Deck Builder:</strong> Deck Checker Tool
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Deck Checker Tool
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a2a4a 0%, #0a1a2a 100%); border: 2px solid #00d9ff; border-radius: 15px;">
             <h3 style="color: #00d9ff; margin: 0 0 15px 0; text-align: center;">🔍 CHECK YOUR DECK</h3>
             <p style="color: #c0c0c0; text-align: center; margin: 0 0 20px 0; font-size: 0.95em;">
@@ -3524,7 +3524,7 @@ function displayDeckChecker() {
 
 function displayMechanics() {
     const mechanicsHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are key Clash Royale mechanics and strategies:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are key Clash Royale mechanics and strategies:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 10px;">⚙️ Core Mechanics</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -3565,7 +3565,7 @@ function displayMechanics() {
 
 function displayFunDecks() {
     const funHTML = `
-        <strong>🤖 Deck Builder:</strong>
+        <strong>🤖 Fatboyclashdeckmakr:</strong>
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a0a1a 0%, #0a0515 100%); border: 2px solid #ff6b9d; border-radius: 12px;">
             <h3 style="color: #ff6b9d; margin-bottom: 15px;">🎮 ${gameKnowledge.funDecks.description}</h3>
             ${gameKnowledge.funDecks.decks.slice(0, 10).map((deck, index) => `
@@ -3615,7 +3615,7 @@ function showFunDeckGuide(deckName) {
     if (!deck) return;
     
     const guideHTML = `
-        <strong>🤖 Deck Builder:</strong>
+        <strong>🤖 Fatboyclashdeckmakr:</strong>
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a0a1a 0%, #0a0515 100%); border: 3px solid #ff6b9d; border-radius: 12px;">
             <div style="text-align: center; margin-bottom: 20px;">
                 <h2 style="color: #ffaa00; margin: 0 0 5px 0; font-size: 1.8em;">🎮 ${deck.name}</h2>
@@ -3679,7 +3679,7 @@ function displayMetaDecks() {
     const statusColor = metaFreshness.status === 'current' ? '#44ff44' : metaFreshness.status === 'recent' ? '#ffaa00' : '#ff4444';
     
     const metaHTML = `
-        <strong>🤖 Deck Builder:</strong> Here are the top competitive meta decks:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Here are the top competitive meta decks:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <div style="background: #0a0a0a; padding: 10px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid ${statusColor};">
                 <span style="color: ${statusColor}; font-size: 0.85em; font-weight: bold;">● ${metaFreshness.status.toUpperCase()}</span>
@@ -3732,12 +3732,12 @@ function displayMetaDecks() {
 // Manual force update function
 async function forceDataUpdate() {
     if (gameKnowledge.updateInProgress) {
-        addChatMessage('<strong>🤖 Deck Builder:</strong> <div style="color: #ffaa00; padding: 10px;">⚠️ Update already in progress. Please wait...</div>', 'bot');
+        addChatMessage('<strong>🤖 Fatboyclashdeckmakr:</strong> <div style="color: #ffaa00; padding: 10px;">⚠️ Update already in progress. Please wait...</div>', 'bot');
         return;
     }
     
     const confirmHTML = `
-        <strong>🤖 Deck Builder:</strong>
+        <strong>🤖 Fatboyclashdeckmakr:</strong>
         <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; border: 1px solid #333;">
             <p style="color: #00d9ff; margin: 0 0 10px 0;">🔄 Forcing data refresh from all sources...</p>
             <p style="color: #999; font-size: 0.9em; margin: 0;">Current version: ${gameKnowledge.dataVersion} (${gameKnowledge.lastUpdated})</p>
@@ -3748,7 +3748,7 @@ async function forceDataUpdate() {
     gameKnowledge.updateInProgress = true;
     
     const updateHTML = `
-        <strong>🤖 Deck Builder:</strong>
+        <strong>🤖 Fatboyclashdeckmakr:</strong>
         <div style="background: linear-gradient(135deg, #00d9ff 0%, #0088cc 100%); padding: 15px; border-radius: 10px; border: 2px solid #00ffff; margin: 10px 0;">
             <h4 style="color: #000; margin: 0 0 8px 0;">🔄 Manual Update Initiated</h4>
             <p style="color: #000; margin: 0; font-size: 0.9em;">Fetching latest data from all sources...</p>
@@ -3764,7 +3764,7 @@ async function forceDataUpdate() {
 
 function displayHighestWinRateDecks() {
     const winRateHTML = `
-        <strong>🤖 Deck Builder:</strong> ${gameKnowledge.highestWinRateDecks.description}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> ${gameKnowledge.highestWinRateDecks.description}
         <div style="margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #1a0a2a 0%, #0a0a1a 100%); border: 2px solid #e94560; border-radius: 15px; box-shadow: 0 5px 25px rgba(233, 69, 96, 0.3);">
             <h3 style="color: #fbbf24; margin-bottom: 20px; text-align: center; font-size: 1.5em;">🏆 TOP 5 HIGHEST WIN RATE DECKS</h3>
             <p style="color: #999; text-align: center; font-size: 0.9em; margin: -15px 0 20px 0;">Based on competitive ladder & tournament statistics</p>
@@ -3854,7 +3854,7 @@ function displayHighestWinRateDecks() {
 
 function displayMostPlayedDecks() {
     const popularHTML = `
-        <strong>🤖 Deck Builder:</strong> ${gameKnowledge.mostPlayedDecks.description}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> ${gameKnowledge.mostPlayedDecks.description}
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 15px;">🔥 Top 5 Most Played Decks</h3>
             ${gameKnowledge.mostPlayedDecks.topDecks.map(deck => {
@@ -3891,7 +3891,7 @@ function displayMostPlayedDecks() {
 
 function displayProPlayerDecks() {
     const proHTML = `
-        <strong>🤖 Deck Builder:</strong> ${gameKnowledge.proPlayerDecks.description}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> ${gameKnowledge.proPlayerDecks.description}
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 15px;">👑 What The Best Players Play</h3>
             ${gameKnowledge.proPlayerDecks.players.map(player => `
@@ -3934,7 +3934,7 @@ function displayProPlayerDecks() {
 
 function displayDeckBuildingGuide() {
     const guideHTML = `
-        <strong>🤖 Deck Builder:</strong> Complete guide to building competitive decks:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Complete guide to building competitive decks:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 10px;">🏗️ Essential Components</h3>
             <ul style="color: #c0c0c0; line-height: 1.8;">
@@ -3969,7 +3969,7 @@ function displayDeckBuildingGuide() {
 
 function displayMatchupStrategy() {
     const matchupHTML = `
-        <strong>🤖 Deck Builder:</strong> Matchup strategies against different deck types:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Matchup strategies against different deck types:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <h3 style="color: #e94560; margin-bottom: 15px;">⚔️ How to Play Against Each Archetype</h3>
             
@@ -4009,7 +4009,7 @@ function displayMatchupStrategy() {
 
 function displayCardSynergies() {
     const synergyHTML = `
-        <strong>🤖 Deck Builder:</strong> ${gameKnowledge.cardSynergies.description}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> ${gameKnowledge.cardSynergies.description}
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 15px;">🔗 Top Card Combinations</h3>
             ${gameKnowledge.cardSynergies.combos.sort((a, b) => b.synergy - a.synergy).map((combo, index) => `
@@ -4053,13 +4053,13 @@ function extractSpecificCard(message) {
 function displayCardCounters(cardName) {
     const counters = gameKnowledge.cardCounters.counters[cardName];
     if (!counters) {
-        addChatMessage(`<strong>🤖 Deck Builder:</strong> No specific counter data found for ${cardName}. Try asking about a different card!`, 'bot');
+        addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> No specific counter data found for ${cardName}. Try asking about a different card!`, 'bot');
         return;
     }
     
     const targetCard = clashRoyaleCards.find(c => c.name === cardName);
     const counterHTML = `
-        <strong>🤖 Deck Builder:</strong> How to counter ${cardName}:
+        <strong>🤖 Fatboyclashdeckmakr:</strong> How to counter ${cardName}:
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px;">
             <div style="text-align: center; margin-bottom: 20px;">
                 ${targetCard ? `
@@ -4091,7 +4091,7 @@ function displayCardCounters(cardName) {
 
 function displayAllCounters() {
     const counterHTML = `
-        <strong>🤖 Deck Builder:</strong> ${gameKnowledge.cardCounters.description}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> ${gameKnowledge.cardCounters.description}
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 15px;">🛡️ Card Counter Guide</h3>
             <p style="color: #999; margin-bottom: 20px;">Ask "counter [card name]" to see specific counters (e.g., "counter mega knight")</p>
@@ -4117,13 +4117,13 @@ function displayAllCounters() {
 function showDetailedDeckGuide(deckName) {
     const deck = gameKnowledge.metaDecks.decks.find(d => d.name === deckName);
     if (!deck || !deck.detailedGuide) {
-        addChatMessage(`<strong>🤖 Deck Builder:</strong> Detailed guide not yet available for ${deckName}. Coming soon!`, 'bot');
+        addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> Detailed guide not yet available for ${deckName}. Coming soon!`, 'bot');
         return;
     }
     
     const guide = deck.detailedGuide;
     const guideHTML = `
-        <strong>🤖 Deck Builder:</strong> Complete guide for ${deck.name}
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Complete guide for ${deck.name}
         <div style="margin-top: 15px; padding: 20px; background: #000; border: 2px solid #e94560; border-radius: 10px; max-height: 600px; overflow-y: auto;">
             <div style="text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #333;">
                 <h2 style="color: #e94560; margin: 0 0 10px 0;">${deck.name}</h2>
@@ -4228,7 +4228,7 @@ function showDetailedDeckGuide(deckName) {
 
 function displayMetaAnalysis() {
     const metaHTML = `
-        <strong>🤖 Deck Builder:</strong> Current Meta Analysis (December 2025)
+        <strong>🤖 Fatboyclashdeckmakr:</strong> Current Meta Analysis (December 2025)
         <div style="margin-top: 15px; padding: 15px; background: #000; border: 1px solid #333; border-radius: 10px; max-height: 500px; overflow-y: auto;">
             <h3 style="color: #e94560; margin-bottom: 15px;">📊 Meta Overview</h3>
             <div style="background: #0a0a0a; padding: 15px; border-radius: 10px; border-left: 4px solid #e94560; margin-bottom: 15px;">
@@ -4771,7 +4771,7 @@ function getFunLabel(score) {
 function displayDeckInChat(deck, requestedCards) {
     // Safety check: ensure deck exists and has cards
     if (!deck || deck.length === 0) {
-        addChatMessage('<strong>🤖 Deck Builder:</strong> <div style="color: #ff4444; padding: 10px;">⚠️ Could not build a deck. Please try again with different cards.</div>', 'bot');
+        addChatMessage('<strong>🤖 Fatboyclashdeckmakr:</strong> <div style="color: #ff4444; padding: 10px;">⚠️ Could not build a deck. Please try again with different cards.</div>', 'bot');
         return;
     }
     
@@ -5062,7 +5062,7 @@ function displayDeckInChat(deck, requestedCards) {
         </div>
     `;
     
-    addChatMessage(`<strong>🤖 Deck Builder:</strong> Here's your optimized deck with professional analysis!${deckHTML}`, 'bot');
+    addChatMessage(`<strong>🤖 Fatboyclashdeckmakr:</strong> Here's your optimized deck with professional analysis!${deckHTML}`, 'bot');
 }
 
 function generateComprehensiveAnalysis(deck) {
