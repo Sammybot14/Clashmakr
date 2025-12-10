@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Royale Deck Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ Clash Royale Deck Builder</h1>
+            <p class="subtitle">Select your favorite cards and we'll build the perfect deck!</p>
+        </header>
+
+        <main>
+            <section class="chat-section">
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-message bot-message">
+                        <div class="message-content">
+                            <strong>🤖 Deck Builder:</strong> Hi! I'm the ultimate Clash Royale deck building expert.
+                            <div style="background: #0a0a0a; padding: 8px; border-radius: 6px; margin: 10px 0; border-left: 3px solid #44ff44;">
+                                <span style="color: #44ff44; font-size: 0.85em; font-weight: bold;">🟢 Data Status: Current</span>
+                                <span style="color: #999; font-size: 0.8em; margin-left: 10px;">Updated: December 9, 2025</span>
+                                <div style="color: #00d9ff; font-size: 0.75em; margin-top: 4px;">⚡ Auto-update enabled - Data refreshes automatically when outdated</div>
+                            </div>
+                            Ask me anything:
+                            <ul>
+                                <li><strong>Deck Building:</strong> "Build me a deck with Hog Rider and Fireball" or "Make me a cycle deck"</li>
+                                <li><strong>Meta Intel:</strong> "Show me highest win rate decks" or "Most played decks"</li>
+                                <li><strong>Pro Insights:</strong> "Show me pro player decks" or "What does Morten play?"</li>
+                                <li><strong>Card Synergies:</strong> "Show me card combos" or "Best card synergies"</li>
+                                <li><strong>Counters:</strong> "Counter Mega Knight" or "How to stop Balloon"</li>
+                                <li><strong>Meta Analysis:</strong> "Current meta" or "Meta shifts"</li>
+                                <li><strong>Guides:</strong> "Deck building guide" or "Strategy tips"</li>
+                                <li><strong>Game Info:</strong> "Show all cards", "Latest updates", "Challenges", "Arenas"</li>
+                                <li><strong>Advanced:</strong> "Matchup vs beatdown" or "How to counter control"</li>
+                                <li><strong>🔄 Auto-Update:</strong> Say "Refresh data" or "Force update" to get latest info instantly!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-section">
+                    <div class="input-wrapper">
+                        <input type="text" id="userInput" placeholder="Ask for a deck... (e.g., 'Build me a deck with Hog Rider and Zap')" autocomplete="off" />
+                        <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                    </div>
+                    <button id="sendBtn" class="send-btn">Send</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
