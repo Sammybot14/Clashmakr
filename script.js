@@ -168,7 +168,7 @@ const clashRoyaleCards = [
     { name: 'Ram Rider', type: 'troop', elixir: 5, icon: '🐏', role: 'wincon', targetType: 'ground', rarity: 'legendary', description: 'Slows targets with bola' },
     { name: 'Fisherman', type: 'troop', elixir: 3, icon: '🎣', role: 'support', targetType: 'ground', rarity: 'legendary', description: 'Pulls units with hook' },
     { name: 'Mother Witch', type: 'troop', elixir: 4, icon: '🧙', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Turns troops into hogs' },
-    { name: 'Electro Giant', type: 'troop', elixir: 7, icon: '⚡', role: 'tank', targetType: 'ground', rarity: 'legendary', description: 'Reflects damage as zaps' },
+    { name: 'Electro Giant', type: 'troop', elixir: 7, icon: '⚡', role: 'tank', targetType: 'ground', rarity: 'epic', description: 'Reflects damage as zaps' },
     { name: 'Phoenix', type: 'troop', elixir: 4, icon: '🔥', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Rebirths as egg' },
     { name: 'Princess', type: 'troop', elixir: 3, icon: '👸', role: 'ranged', targetType: 'both', rarity: 'legendary', description: 'Longest range troop' },
     { name: 'Ice Wizard', type: 'troop', elixir: 3, icon: '🧊', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Slows with every attack' },
@@ -219,7 +219,6 @@ const clashRoyaleCards = [
     { name: 'Evo Mortar', type: 'building', elixir: 4, icon: '💥⚡', role: 'wincon', targetType: 'ground', rarity: 'evolution', description: 'Enhanced mortar with faster reload', baseCard: 'Mortar', arena: 6 },
     { name: 'Evo Ice Spirit', type: 'troop', elixir: 1, icon: '❄️⚡', role: 'spell', targetType: 'both', rarity: 'evolution', description: 'Multiple ice spirits with freeze', baseCard: 'Ice Spirit', arena: 8 },
     { name: 'Evo Valkyrie', type: 'troop', elixir: 4, icon: '👸⚡', role: 'splash', targetType: 'ground', rarity: 'evolution', description: 'Valkyrie with enhanced rage', baseCard: 'Valkyrie', arena: 0 },
-    { name: 'Evo Mega Minion', type: 'troop', elixir: 3, icon: '🦇⚡', role: 'damage', targetType: 'both', rarity: 'evolution', description: 'Mega Minion with faster attack speed', baseCard: 'Mega Minion', arena: 7 },
     { name: 'Evo Bats', type: 'troop', elixir: 2, icon: '🦇⚡', role: 'swarm', targetType: 'both', rarity: 'evolution', description: 'More bats with increased speed', baseCard: 'Bats', arena: 5 },
     { name: 'Evo Wizard', type: 'troop', elixir: 5, icon: '🧙⚡', role: 'splash', targetType: 'both', rarity: 'evolution', description: 'Wizard with chain lightning attack', baseCard: 'Wizard', arena: 5 },
     { name: 'Evo P.E.K.K.A', type: 'troop', elixir: 7, icon: '🤖⚡', role: 'tank', targetType: 'ground', rarity: 'evolution', description: 'P.E.K.K.A with dash ability', baseCard: 'Pekka', arena: 4 },
@@ -227,8 +226,14 @@ const clashRoyaleCards = [
     { name: 'Evo Wall Breakers', type: 'troop', elixir: 2, icon: '💥⚡', role: 'wincon', targetType: 'ground', rarity: 'evolution', description: 'More wall breakers with bigger explosion', baseCard: 'Wall Breakers', arena: 9 },
     { name: 'Evo Tesla', type: 'building', elixir: 4, icon: '🔌⚡', role: 'defense', targetType: 'both', rarity: 'evolution', description: 'Tesla with chain lightning', baseCard: 'Tesla', arena: 4 },
     { name: 'Evo Bomber', type: 'troop', elixir: 2, icon: '💣⚡', role: 'splash', targetType: 'ground', rarity: 'evolution', description: 'Bomber with bigger bomb radius', baseCard: 'Bomber', arena: 0 },
-    { name: 'Evo Electro Spirit', type: 'troop', elixir: 1, icon: '⚡⚡', role: 'spell', targetType: 'both', rarity: 'evolution', description: 'Enhanced chain stun effect', baseCard: 'Electro Spirit', arena: 11 },
     { name: 'Evo Royal Recruits', type: 'troop', elixir: 7, icon: '🛡️⚡', role: 'swarm', targetType: 'ground', rarity: 'evolution', description: 'Recruits with enhanced shields', baseCard: 'Royal Recruits', arena: 7 },
+    { name: 'Evo Baby Dragon', type: 'troop', elixir: 4, icon: '🐲⚡', role: 'splash', targetType: 'both', rarity: 'evolution', description: 'Baby Dragon with enhanced splash damage', baseCard: 'Baby Dragon', arena: 2 },
+    { name: 'Evo Cannon', type: 'building', elixir: 3, icon: '💣⚡', role: 'defense', targetType: 'ground', rarity: 'evolution', description: 'Cannon with increased fire rate', baseCard: 'Cannon', arena: 3 },
+    { name: 'Evo Executioner', type: 'troop', elixir: 5, icon: '🪓⚡', role: 'splash', targetType: 'both', rarity: 'evolution', description: 'Executioner with knockback', baseCard: 'Executioner', arena: 11 },
+    { name: 'Evo Goblin Cage', type: 'building', elixir: 4, icon: '🗑️⚡', role: 'defense', targetType: 'ground', rarity: 'evolution', description: 'Goblin Cage with enhanced brawler', baseCard: 'Goblin Cage', arena: 8 },
+    { name: 'Evo Witch', type: 'troop', elixir: 5, icon: '🧙⚡', role: 'splash', targetType: 'both', rarity: 'evolution', description: 'Witch with faster skeleton spawning', baseCard: 'Witch', arena: 5 },
+    { name: 'Evo Furnace', type: 'building', elixir: 4, icon: '🔥⚡', role: 'spawner', targetType: 'ground', rarity: 'evolution', description: 'Furnace with enhanced fire spirits', baseCard: 'Furnace', arena: 8 },
+    { name: 'Evo Musketeer', type: 'troop', elixir: 4, icon: '🔫⚡', role: 'ranged', targetType: 'both', rarity: 'evolution', description: 'Musketeer with splash damage', baseCard: 'Musketeer', arena: 0 },
     
     // Additional Cards to Match Late 2025 Card Pool (~30 Commons, ~24 Rares, ~33 Epics, ~23 Legendaries)
     
@@ -263,20 +268,20 @@ const gameKnowledge = {
     
     // ==================== CURRENT CARD STATISTICS (VERIFIED - DECEMBER 2025) ====================
     currentCardStats: {
-        totalCards: 113, // 8 champions + 4 heroes + 101 other cards
+        totalCards: 118, // 8 champions + 4 heroes + 106 other cards
         champions: 8, // Official Clash Royale champions
         heroes: 4, // Custom hero cards
-        evolutions: 18, // Verified evolution cards including Tesla and Bomber
+        evolutions: 23, // All verified evolution cards
         byRarity: {
             common: 30,
             rare: 31,
-            epic: 33,
-            legendary: 22, // Phoenix and other legendaries (Cannoneer removed - it's a tower)
+            epic: 34, // Electro Giant moved from legendary to epic
+            legendary: 21, // Electro Giant moved to epic
             champion: 8,
             hero: 4,
-            evolution: 18
+            evolution: 23
         },
-        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 22 Legendaries, and 18 Evolution cards"
+        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 21 Legendaries, and 23 Evolution cards"
     },
     
     // ==================== GAME HISTORY ====================
