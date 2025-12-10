@@ -170,7 +170,6 @@ const clashRoyaleCards = [
     { name: 'Mother Witch', type: 'troop', elixir: 4, icon: '🧙', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Turns troops into hogs' },
     { name: 'Electro Giant', type: 'troop', elixir: 7, icon: '⚡', role: 'tank', targetType: 'ground', rarity: 'legendary', description: 'Reflects damage as zaps' },
     { name: 'Phoenix', type: 'troop', elixir: 4, icon: '🔥', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Rebirths as egg' },
-    { name: 'Cannoneer', type: 'troop', elixir: 5, icon: '💣', role: 'ranged', targetType: 'both', rarity: 'legendary', description: 'Deploys cannon and fires powerful shots' },
     { name: 'Princess', type: 'troop', elixir: 3, icon: '👸', role: 'ranged', targetType: 'both', rarity: 'legendary', description: 'Longest range troop' },
     { name: 'Ice Wizard', type: 'troop', elixir: 3, icon: '🧊', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Slows with every attack' },
     { name: 'Lumberjack', type: 'troop', elixir: 4, icon: '🪓', role: 'damage', targetType: 'ground', rarity: 'legendary', description: 'Drops rage on death' },
@@ -264,7 +263,7 @@ const gameKnowledge = {
     
     // ==================== CURRENT CARD STATISTICS (VERIFIED - DECEMBER 2025) ====================
     currentCardStats: {
-        totalCards: 114, // 8 champions + 4 heroes + 102 other cards
+        totalCards: 113, // 8 champions + 4 heroes + 101 other cards
         champions: 8, // Official Clash Royale champions
         heroes: 4, // Custom hero cards
         evolutions: 18, // Verified evolution cards including Tesla and Bomber
@@ -272,12 +271,12 @@ const gameKnowledge = {
             common: 30,
             rare: 31,
             epic: 33,
-            legendary: 23, // Includes Phoenix and Cannoneer
+            legendary: 22, // Phoenix and other legendaries (Cannoneer removed - it's a tower)
             champion: 8,
             hero: 4,
             evolution: 18
         },
-        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 23 Legendaries, and 18 Evolution cards"
+        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 22 Legendaries, and 18 Evolution cards"
     },
     
     // ==================== GAME HISTORY ====================
