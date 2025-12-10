@@ -85,8 +85,8 @@ const clashRoyaleCards = [
     { name: 'Mighty Miner', type: 'champion', elixir: 4, icon: '⛏️', role: 'tank', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Burrows underground and gains armor' },
     { name: 'Monk', type: 'champion', elixir: 5, icon: '🧘', role: 'support', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Deflects projectiles with Pensive Protection' },
     { name: 'Little Prince', type: 'champion', elixir: 3, icon: '🤴', role: 'wincon', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Guardian angel ability for support' },
-    { name: 'Phoenix', type: 'champion', elixir: 4, icon: '🔥', role: 'support', targetType: 'both', rarity: 'champion', arena: 16, description: 'Rebirths as egg with special ability' },
-    { name: 'Cannoneer', type: 'champion', elixir: 5, icon: '💣', role: 'ranged', targetType: 'both', rarity: 'champion', arena: 16, description: 'Deploys cannon and fires powerful shots' },
+    { name: 'Boss Bandit', type: 'champion', elixir: 4, icon: '🏴‍☠️', role: 'damage', targetType: 'ground', rarity: 'champion', arena: 16, description: 'Enhanced dash with special abilities' },
+    { name: 'Goblinstein', type: 'champion', elixir: 5, icon: '⚗️', role: 'support', targetType: 'both', rarity: 'champion', arena: 16, description: 'Spawns units with special abilities' },
     
     // Hero Cards (Custom Special Units)
     { name: 'Hero Musketeer', type: 'hero', elixir: 4, icon: '🎯', role: 'ranged', targetType: 'both', rarity: 'hero', arena: 16, description: 'Enhanced musketeer with hero abilities' },
@@ -169,6 +169,8 @@ const clashRoyaleCards = [
     { name: 'Fisherman', type: 'troop', elixir: 3, icon: '🎣', role: 'support', targetType: 'ground', rarity: 'legendary', description: 'Pulls units with hook' },
     { name: 'Mother Witch', type: 'troop', elixir: 4, icon: '🧙', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Turns troops into hogs' },
     { name: 'Electro Giant', type: 'troop', elixir: 7, icon: '⚡', role: 'tank', targetType: 'ground', rarity: 'legendary', description: 'Reflects damage as zaps' },
+    { name: 'Phoenix', type: 'troop', elixir: 4, icon: '🔥', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Rebirths as egg' },
+    { name: 'Cannoneer', type: 'troop', elixir: 5, icon: '💣', role: 'ranged', targetType: 'both', rarity: 'legendary', description: 'Deploys cannon and fires powerful shots' },
     { name: 'Princess', type: 'troop', elixir: 3, icon: '👸', role: 'ranged', targetType: 'both', rarity: 'legendary', description: 'Longest range troop' },
     { name: 'Ice Wizard', type: 'troop', elixir: 3, icon: '🧊', role: 'support', targetType: 'both', rarity: 'legendary', description: 'Slows with every attack' },
     { name: 'Lumberjack', type: 'troop', elixir: 4, icon: '🪓', role: 'damage', targetType: 'ground', rarity: 'legendary', description: 'Drops rage on death' },
@@ -270,12 +272,12 @@ const gameKnowledge = {
             common: 30,
             rare: 31,
             epic: 33,
-            legendary: 21, // Phoenix moved to champion
+            legendary: 23, // Includes Phoenix and Cannoneer
             champion: 8,
             hero: 4,
             evolution: 18
         },
-        description: "Clash Royale card pool with 8 Champions (including Phoenix and Cannoneer), 4 Hero Cards, 21 Legendaries, and 18 Evolution cards"
+        description: "Clash Royale card pool with 8 Champions (Archer Queen, Golden Knight, Skeleton King, Mighty Miner, Monk, Little Prince, Boss Bandit, Goblinstein), 4 Hero Cards, 23 Legendaries, and 18 Evolution cards"
     },
     
     // ==================== GAME HISTORY ====================
